@@ -1,0 +1,16 @@
+cradle:
+  cabal:
+    - path: "heap-shapes"
+      component: "heap-shapes:exe:heap-shapes"
+
+    - path: "hiobe-index/server"
+      component: "hiobe-index:exe:hiobe-server"
+
+    - path: "hiobe-index/traffic"
+      component: "hiobe-index:exe:hiobe-traffic"
+
+    - path: "hiobe-index/common"
+      component: "hiobe-index:lib:common"
+
+    - path: "hiobe-index/debugger"
+      component: "hiobe-index:exe:hiobe-debugger"

@@ -1,0 +1,7 @@
+packages:
+  heap-shapes
+  hiobe-index
+
+package *
+  ghc-options:
+    -Wall -finfo-table-map -fdistinct-constructor-tables

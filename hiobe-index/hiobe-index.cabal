@@ -1,0 +1,96 @@
+cabal-version:      2.4
+name:               hiobe-index
+version:            0.1.0.0
+synopsis:           The Haskell Is Obviously Better at Everything (HIOBE) Index
+description:        A very honest programming language popularity and statistics index
+author:             Finley McIlwaine
+maintainer:         finley@well-typed.com
+
+extra-source-files:
+  README.md
+
+common lang
+  default-language: Haskell2010
+  default-extensions:
+      OverloadedStrings
+      ImportQualifiedPost
+      LambdaCase
+      TupleSections
+      TypeApplications
+      NumericUnderscores
+
+executable hiobe-server
+  import:           lang
+  hs-source-dirs:   server
+  main-is:          Main.hs
+  other-modules:
+      Database
+    , Handlers
+    , Handlers.Languages
+    , Handlers.Survey
+    , Handlers.Utils
+    , State
+  build-depends:
+      base >=4.16.3.0
+    , bytestring
+    , containers
+    , directory
+    , mtl
+    , scotty
+    , stm
+    , sqlite-simple
+    , text
+    , unordered-containers
+    , vector
+    , wai
+
+    , ghc-debug-stub
+    , nothunks
+
+    , common
+  ghc-options:
+    -- Necessary for eventlog support
+    -eventlog
+
+    -- Necessary for -h* RTS options
+    -rtsopts
+
+    -- Necessary for info table profiling
+    -finfo-table-map -fdistinct-constructor-tables
+
+    -- Necessary for our program to be a ghc-debug debuggee
+    -threaded
+
+executable hiobe-traffic
+  import:           lang
+  hs-source-dirs:   traffic
+  main-is:          Main.hs
+  build-depends:
+      base >=4.16.3.0
+    , common
+    , req
+    , random
+    , http-client
+    , containers
+    , text
+  ghc-options:
+    -threaded
+
+library common
+  import:           lang
+  hs-source-dirs:   common
+  exposed-modules:
+    Common
+  build-depends:
+      base >=4.16.3.0
+    , text
+    , aeson
+
+executable hiobe-debugger
+  import:           lang
+  hs-source-dirs:   debugger
+  main-is:          Main.hs
+  build-depends:
+      base >=4.16.3.0
+    , ghc-debug-client
+    , containers

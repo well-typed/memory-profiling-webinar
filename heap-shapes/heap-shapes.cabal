@@ -1,0 +1,15 @@
+cabal-version:      2.4
+name:               heap-shapes
+version:            0.1.0.0
+synopsis:           Basic data values and thunks to be viewed using ghc-debug
+author:             Finley McIlwaine
+maintainer:         finleymcilwaine@gmail.com
+
+executable heap-shapes
+  main-is:          Main.hs
+  build-depends:    
+      base >=4.16.3.0
+    , ghc-debug-stub
+    , containers
+  default-language: Haskell2010
+  ghc-options: -threaded -finfo-table-map -fdistinct-constructor-tables
